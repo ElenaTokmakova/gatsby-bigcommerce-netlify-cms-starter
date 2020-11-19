@@ -4,7 +4,6 @@ const channelRegionPathIdx = 2
 const channelRegionCurrencyIdx = 3
 
 export const parseChannelRegionInfo = (channel) => {
-  console.log("Channels!", channel)
   if (channel && channel.external_id) {
     const channelSpec = channel.external_id.split('|')
     return {

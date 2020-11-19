@@ -4,14 +4,26 @@ const channelRegionPathIdx = 2
 const channelRegionCurrencyIdx = 3
 
 export const parseChannelRegionInfo = (channel) => {
-  const channelSpec = channel.external_id.split('|')
-  return {
-    channelRegionName: channelSpec[channelRegionNameIdx],
-    channelRegionLocale: channelSpec[channelRegionLocaleIdx],
-    channelRegionCountryCode: channelSpec[channelRegionLocaleIdx].split('_')[1],
-    channelRegionPathPrefix: (!channelSpec[channelRegionPathIdx].length) ? '' : '/' + channelSpec[channelRegionPathIdx],
-    channelRegionCurrency: channelSpec[channelRegionCurrencyIdx],
-    channelRegionHomeLink: '/' + channelSpec[channelRegionPathIdx],
+  console.log("Channels!", channel)
+  if (channel && channel.external_id) {
+    const channelSpec = channel.external_id.split('|')
+    return {
+      channelRegionName: channelSpec[channelRegionNameIdx],
+      channelRegionLocale: channelSpec[channelRegionLocaleIdx],
+      channelRegionCountryCode: channelSpec[channelRegionLocaleIdx].split('_')[1],
+      channelRegionPathPrefix: (!channelSpec[channelRegionPathIdx].length) ? '' : '/' + channelSpec[channelRegionPathIdx],
+      channelRegionCurrency: channelSpec[channelRegionCurrencyIdx],
+      channelRegionHomeLink: '/' + channelSpec[channelRegionPathIdx],
+    }
+  } else {
+    return {
+      channelRegionName: '',
+      channelRegionLocale: '',
+      channelRegionCountryCode: '',
+      channelRegionPathPrefix: '',
+      channelRegionCurrency: '',
+      channelRegionHomeLink: '',
+    }
   }
 }
 
